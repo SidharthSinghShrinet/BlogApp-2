@@ -1,7 +1,9 @@
 import { cookies } from "next/headers";
 import sessionCollection from "@/model/session.model";
 import jwt from "jsonwebtoken";
+import connectDB from "@/config/database";
 export async function GET() {
+  await connectDB();
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   const { sessionId } = jwt.decode(token);
