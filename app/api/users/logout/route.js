@@ -1,6 +1,11 @@
 import { cookies } from "next/headers";
+import sessionCollection from "@/model/session.model";
+import jwt from "jsonwebtoken";
 export async function GET() {
   const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  const { sessionId } = jwt.decode(token);
+  await sessionCollection.findOneAndDelete({ sessionId });
   cookieStore.delete("token");
   const response = {
     success: true,

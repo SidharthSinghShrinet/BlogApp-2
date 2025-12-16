@@ -8,9 +8,6 @@ function Page() {
   const [blogdescription, setBlogdescription] = useState("");
   const [open, setOpen] = useState(false);
   const [editBlogId, setEditBlogId] = useState(null);
-  console.log(blogtitle);
-  console.log(blogdescription);
-  console.log(allBlogs);
   async function handleBlog(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -22,16 +19,16 @@ function Page() {
       },
       body: JSON.stringify({ title, description }),
     });
-    console.log(response);
+    // console.log(response);
     const { newBlog } = await response.json();
     setAllBlogs([...allBlogs, newBlog]);
   }
 
   async function handleLogout() {
-    console.log("Logout Button is Clicked");
+    // console.log("Logout Button is Clicked");
     const response = await fetch("/api/users/logout");
     if (response.ok) {
-      console.log("Logged out successfully");
+      // console.log("Logged out successfully");
       router.push("/login");
     }
   }
@@ -40,7 +37,7 @@ function Page() {
     const response = await fetch(`/api/blogs/deleteBlog/${id}`, {
       method: "DELETE",
     });
-    console.log(response);
+    // console.log(response);
     const { blogs } = await response.json();
     setAllBlogs(blogs);
   }
@@ -56,7 +53,7 @@ function Page() {
       },
       body: JSON.stringify({ title, description }),
     });
-    console.log(response);
+    // console.log(response);
     const { blogs } = await response.json();
     setAllBlogs(blogs);
     setOpen(false);

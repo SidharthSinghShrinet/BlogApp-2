@@ -18,7 +18,7 @@ function Page() {
         body: JSON.stringify({ username, email, password }),
       });
       const data = await response.json();
-      console.log("Registration successful:", data);
+      // console.log("Registration successful:", data);
     } catch (error) {
       console.log("Registration error:", error);
     }
